@@ -1,0 +1,10 @@
+sudo: required
+
+services:
+  - docker
+
+before_install: 
+  - docker build -t espressotrip/docker-ci-workflow -f Dockerfile.dev .
+
+script:
+  - docker run espressotrip/docker-ci-workflow npm run test -- --coverage
