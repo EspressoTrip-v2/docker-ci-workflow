@@ -1,0 +1,23 @@
+version: '3.8'
+
+services: 
+    web:
+        container_name: travis
+        build: 
+            context: .
+            dockerfile: Dockerfile.dev
+        ports: 
+            - "3000:3000"
+        volumes: 
+            - /usr/app/node_modules
+            - .:/usr/app
+    
+    tests:
+        container_name: travis_test
+        build:
+            context: .
+            dockerfile: Dockerfile.dev
+        volumes: 
+            - /usr/app/node_modules
+            - .:/usr/app
+        command: ["npm", "run", "test"]
